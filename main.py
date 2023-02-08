@@ -31,7 +31,7 @@ def change_password(oldPassword):
 
 
 def input_password(prompt="Gib dein Passwort ein: "):
-    return getpass.getpass(prompt)
+    return getpass.getpass(prompt)  # identisch zu input(prompt) nur ohne Zeichendarstellung bei Eingabe
 
 
 # Ändere den Usernamen und gib ihn zurück
