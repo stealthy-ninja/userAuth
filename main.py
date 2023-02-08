@@ -27,7 +27,7 @@ def show_username(username):
 def change_password(oldPassword):
     while input_password("Wie ist dein altes Passwort: ") != oldPassword:
         print("Passwort stimmt nicht, bitte versuche es erneut!")
-    return input("Bitte gib ein neues Passwort ein: ")
+    return input_password("Bitte gib ein neues Passwort ein: ")
 
 
 def input_password(prompt="Gib dein Passwort ein: "):
@@ -77,7 +77,7 @@ while True:
     elif choice == "d":  # display
         show_username(username)
     elif choice == "p":  # password
-        password = change_password(password)
+        password = change_password(password)  # Parameter oldPassword = password
     elif choice == "u":  # user
         username = change_username()
     elif choice == "q":  # quit
