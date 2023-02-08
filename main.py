@@ -1,4 +1,5 @@
 import getpass
+import hashlib
 
 # Lade die shadow Datei und gib sie zurück
 def load_shadow_file():
@@ -30,8 +31,10 @@ def change_password(oldPassword):
     return input_password("Bitte gib ein neues Passwort ein: ")
 
 
+# Passwort wird automatisch gehasht und dann als String zurückgegeben
 def input_password(prompt="Gib dein Passwort ein: "):
-    return getpass.getpass(prompt)  # identisch zu input(prompt) nur ohne Zeichendarstellung bei Eingabe
+    return hashlib.sha256(getpass.getpass(prompt).encode("utf-8")).hexdigest()
+    # getpass.getpass(prompt) ist identisch zu input(prompt) nur ohne Zeichendarstellung bei Eingabe
 
 
 # Ändere den Usernamen und gib ihn zurück
@@ -88,6 +91,5 @@ while True:
 
 
 # TODO
-# Verschlüsseln/Hashwert (Passwort)
 # Nach X falschen Passworteingaben Programm beenden
 # Passwortanforderungen
