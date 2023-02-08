@@ -1,3 +1,5 @@
+import getpass
+
 # Lade die shadow Datei und gib sie zurück
 def load_shadow_file():
     f = open("shadow")
@@ -23,9 +25,13 @@ def show_username(username):
 
 # Ändere das Passwort und gib es zurück
 def change_password(oldPassword):
-    while input("Wie ist dein altes Passwort: ") != oldPassword:
+    while input_password("Wie ist dein altes Passwort: ") != oldPassword:
         print("Passwort stimmt nicht, bitte versuche es erneut!")
     return input("Bitte gib ein neues Passwort ein: ")
+
+
+def input_password(prompt="Gib dein Passwort ein: "):
+    return getpass.getpass(prompt)
 
 
 # Ändere den Usernamen und gib ihn zurück
@@ -37,7 +43,7 @@ def change_username():
 # Gibt True zurück wenn erfolgreich, sonst False
 def login(username, password):
     userInput = input("Gib deinen Usernamen an: ")
-    passwordInput = input("Gib dein Passwort an: ")
+    passwordInput = input_password("Gib dein Passwort an: ")
     if userInput == username and passwordInput == password:
         return True
     else:
@@ -83,6 +89,5 @@ while True:
 
 # TODO
 # Verschlüsseln/Hashwert (Passwort)
-# Passworteingabe verschleiern (**** statt Klartext)
 # Nach X falschen Passworteingaben Programm beenden
 # Passwortanforderungen
