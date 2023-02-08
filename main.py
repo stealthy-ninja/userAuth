@@ -26,14 +26,22 @@ def show_username(username):
 
 # Ändere das Passwort und gib es zurück
 def change_password(oldPassword):
-    while input_password("Wie ist dein altes Passwort: ") != oldPassword:
-        print("Passwort stimmt nicht, bitte versuche es erneut!")
-    return input_password("Bitte gib ein neues Passwort ein: ")
+    return input_password(oldPassword, "Wie ist dein altes Passwort: ")
 
 
 # Passwort wird automatisch gehasht und dann als String zurückgegeben
-def input_password(prompt="Gib dein Passwort ein: "):
-    return hashlib.sha256(getpass.getpass(prompt).encode("utf-8")).hexdigest()
+def input_password(password, prompt="Gib dein Passwort ein: "):
+    maxPasswordTries = 3
+    passwordTries = 0
+    while passwordTries < maxPasswordTries:
+        passwordTries += 1
+        passwordTry = hashlib.sha256(getpass.getpass(prompt).encode("utf-8")).hexdigest()
+        if passwordTry == password:
+            return passwordTry
+        else:
+            print("Passwort ist falsch, bitte erneut eingeben.)")
+            print(f"Du hast noch {maxPasswordTries-passwordTries} Versuche.")
+    exit()
 
 
 # Ändere den Usernamen und gib ihn zurück
@@ -92,3 +100,4 @@ while True:
 # TODO
 # Nach X falschen Passworteingaben Programm beenden
 # Passwortanforderungen
+# Mehrere Benutzer ermöglichen
