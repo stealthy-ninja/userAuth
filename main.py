@@ -79,3 +79,10 @@ while True:
         exit()
     else:
         print("Ich verstehe die Eingabe nicht.")
+
+
+# TODO
+# Verschlüsseln/Hashwert (Passwort)
+# Passworteingabe verschleiern (**** statt Klartext)
+# Nach X falschen Passworteingaben Programm beenden
+# Passwortanforderungen
