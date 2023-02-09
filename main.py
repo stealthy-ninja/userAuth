@@ -99,6 +99,5 @@ while True:
 
 
 # TODO
-# Nach X falschen Passworteingaben Programm beenden
 # Passwortanforderungen
 # Mehrere Benutzer ermöglichen
