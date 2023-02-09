@@ -53,7 +53,7 @@ def change_username():
 # Gibt True zurück wenn erfolgreich, sonst False
 def login(username, password):
     userInput = input("Gib deinen Usernamen an: ")
-    passwordInput = input_password("Gib dein Passwort an: ")
+    passwordInput = input_password(password, "Gib dein Passwort an: ")
     if userInput == username and passwordInput == password:
         return True
     else:
