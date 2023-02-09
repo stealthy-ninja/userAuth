@@ -103,5 +103,10 @@ while True:
 
 
 # TODO
-# Passwortanforderungen
+# Passwortanforderungen (Passwortlänge, Variation an vielfältige zulässige Zeichen)
 # Mehrere Benutzer ermöglichen
+    # User-ID einführen
+# Angriff mit Doppelpunkt untersuchen
+    # Funktion zum Überprüfen der shadow-Datei auf Korrektheit
+# Logs erstellen
+# 2FA (2-Faktor-Authentifizierung)
