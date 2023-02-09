@@ -26,7 +26,11 @@ def show_username(username):
 
 # Ändere das Passwort und gib es zurück
 def change_password(oldPassword):
-    return input_password(oldPassword, "Wie ist dein altes Passwort: ")
+    if input_password(oldPassword, "Wie ist dein altes Passwort: ") == oldPassword:
+        newInput = getpass.getpass("Gib dein neues Passwort ein: ")
+        # in newInput sollen mindestens 5 Zeichen sein
+        newPassword = hashlib.sha256(newInput.encode("utf-8")).hexdigest()
+    return newPassword
 
 
 # Passwort wird automatisch gehasht und dann als String zurückgegeben
