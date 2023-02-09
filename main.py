@@ -36,6 +36,7 @@ def input_password(password, prompt="Gib dein Passwort ein: "):
     while passwordTries < maxPasswordTries:
         passwordTries += 1
         passwordTry = hashlib.sha256(getpass.getpass(prompt).encode("utf-8")).hexdigest()
+        # getpass.getpass(prompt) ist identisch zu input(prompt) nur ohne Zeichendarstellung bei Eingabe
         if passwordTry == password:
             return passwordTry
         else:
