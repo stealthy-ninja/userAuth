@@ -26,27 +26,39 @@ def show_username(username):
 
 # Ändere das Passwort und gib es zurück
 def change_password(oldPassword):
-    if input_password(oldPassword, "Wie ist dein altes Passwort: ") == oldPassword:
-        newInput = getpass.getpass("Gib dein neues Passwort ein: ")
-        # in newInput sollen mindestens 5 Zeichen sein
-        newPassword = hashlib.sha256(newInput.encode("utf-8")).hexdigest()
-    return newPassword
+    # Da das Programm beendet wird, falls nicht erfolgreich, reicht das so
+    input_current_password(oldPassword, "Gib dein altes Passwort ein: ")
+    newPassword = input_password("Gib dein neues Passwort ein: ")
+    while len(newPassword) < 5:
+        print("Dein Passwort erfüllt die Richtlinien nicht. Mindestens 5 Zeichen.")
+        newPassword = input_password("Gib dein neues Passwort ein: ")
+    return get_password_hash(newPassword)
 
 
-# Passwort wird automatisch gehasht und dann als String zurückgegeben
-def input_password(password, prompt="Gib dein Passwort ein: "):
+# Berechne Passworthash
+def get_password_hash(password):
+    return hashlib.sha256(password.encode("utf-8")).hexdigest()
+
+
+# Verschleierte Passworteingabe
+def input_password(prompt="Gib dein Passwort ein: "):
+    return getpass.getpass(prompt)
+    # getpass.getpass(prompt) ist identisch zu input(prompt) nur ohne Zeichendarstellung bei Eingabe
+
+
+# Fragt das aktuelle Passwort Passwort ab
+def input_current_password(password, prompt="Gib dein Passwort ein: "):
     maxPasswordTries = 3
     passwordTries = 0
     while passwordTries < maxPasswordTries:
         passwordTries += 1
-        passwordTry = hashlib.sha256(getpass.getpass(prompt).encode("utf-8")).hexdigest()
-        # getpass.getpass(prompt) ist identisch zu input(prompt) nur ohne Zeichendarstellung bei Eingabe
+        passwordTry = get_password_hash(input_password(prompt))
         if passwordTry == password:
-            return passwordTry
+            return True
         else:
             print("Passwort ist falsch, bitte erneut eingeben.)")
             print(f"Du hast noch {maxPasswordTries-passwordTries} Versuche.")
-    exit()
+    exit()  # alternativ könnte man return False nutzen und weitere Dinge tun, nicht nur das Programm beenden
 
 
 # Ändere den Usernamen und gib ihn zurück
@@ -58,8 +70,8 @@ def change_username():
 # Gibt True zurück wenn erfolgreich, sonst False
 def login(username, password):
     userInput = input("Gib deinen Usernamen an: ")
-    passwordInput = input_password(password, "Gib dein Passwort an: ")
-    if userInput == username and passwordInput == password:
+    passwordSuccess = input_current_password(password, "Gib dein Passwort an: ")
+    if userInput == username and passwordSuccess:
         return True
     else:
         return False
