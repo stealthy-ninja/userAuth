@@ -73,7 +73,11 @@ def input_current_password(password, prompt="Gib dein Passwort ein: "):
 
 # Ändere den Usernamen und gib ihn zurück
 def change_username():
-    return input("Bitte gib einen neuen Usernamen ein: ")
+    newUsername = input("Bitte gib einen neuen Usernamen ein: ")
+    while not (re.findall(r'^[a-zA-Z0-9_-]+$', newUsername)):
+        print("Der Username darf ausschließlich Groß- und Kleinbuchstaben, Zahlen und \"-\" bzw. \"_\" enthalten.")
+        newUsername = input("Bitte gib einen neuen gültigen Usernamen ein: ")
+    return newUsername
 
 
 # User-Anmeldung
