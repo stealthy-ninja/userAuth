@@ -1,5 +1,6 @@
 import getpass
 import hashlib
+import re
 
 # Lade die shadow Datei und gib sie zurück
 def load_shadow_file():
@@ -29,8 +30,12 @@ def change_password(oldPassword):
     # Da das Programm beendet wird, falls nicht erfolgreich, reicht das so
     input_current_password(oldPassword, "Gib dein altes Passwort ein: ")
     newPassword = input_password("Gib dein neues Passwort ein: ")
-    while len(newPassword) < 5:
-        print("Dein Passwort erfüllt die Richtlinien nicht. Mindestens 5 Zeichen.")
+    while not\
+            (len(newPassword) >= 5 and
+             len(re.findall(r'[a-z]', newPassword)) > 0 and
+             len(re.findall(r'[0-9]', newPassword)) > 0):
+        print("Dein Passwort erfüllt die Richtlinien nicht.")
+        print("Mindestens 5 Zeichen und es soll Kleinbuchstaben und Zahlen enthalten.")
         newPassword = input_password("Gib dein neues Passwort ein: ")
     return get_password_hash(newPassword)
 
@@ -115,7 +120,6 @@ while True:
 
 
 # TODO
-# Passwortanforderungen (Passwortlänge, Variation an vielfältige zulässige Zeichen)
 # Mehrere Benutzer ermöglichen
     # User-ID einführen
 # Angriff mit Doppelpunkt untersuchen
