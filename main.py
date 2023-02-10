@@ -30,10 +30,11 @@ def change_password(oldPassword):
     # Da das Programm beendet wird, falls nicht erfolgreich, reicht das so
     input_current_password(oldPassword, "Gib dein altes Passwort ein: ")
     newPassword = input_password("Gib dein neues Passwort ein: ")
+    # Solange unsere Passwortrichtlinien nicht erfüllt sind, frage erneut nach dem neuen Passwort
     while not\
-            (len(newPassword) >= 5 and
-             len(re.findall(r'[a-z]', newPassword)) > 0 and
-             len(re.findall(r'[0-9]', newPassword)) > 0):
+            (len(newPassword) >= 5 and  # Mindestpasswortlänge >= 5
+             len(re.findall(r'[a-z]', newPassword)) > 0 and  # Mehr als 0 (also mindestens 1) Kleinbuchstabe
+             len(re.findall(r'[0-9]', newPassword)) > 0):  # Mehr als 0 (also mindestens 1) Zahl
         print("Dein Passwort erfüllt die Richtlinien nicht.")
         print("Mindestens 5 Zeichen und es soll Kleinbuchstaben und Zahlen enthalten.")
         newPassword = input_password("Gib dein neues Passwort ein: ")
