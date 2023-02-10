@@ -11,7 +11,11 @@ def load_shadow_file():
 # Lade credentials (Login-Daten) und gib sie zurück
 def load_credentials():
     line = load_shadow_file()
-    return line.split(":")[0:2]
+    if len(line.split(":")) == 2:
+        return line.split(":")[0:2]
+    else:
+        print("ACHTUNG! shadow Datei wurde manipuliert!")
+        exit(1)
 
 
 # speichere die shadow Datei
